@@ -17,7 +17,10 @@ class MysqlController  extends AdminBaseController
 {
 
     public function hash(){
-        //$roles = Db::name('mysql')->select();
+        //连接本地的 Redis 服务
+        $redis = new \Redis();
+        $redis->connect('127.0.0.1', 6379);
+        var_dump($redis->get('gao'));die;
         $hashObj=new HashController();
         $hashObj->addServer("serv1")->addServer("serv2")->addServer("serv3");
         for($i=100;$i<200;$i++){
