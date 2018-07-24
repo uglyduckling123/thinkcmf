@@ -20,7 +20,13 @@ class MysqlController  extends AdminBaseController
         //连接本地的 Redis 服务
         $redis = new \Redis();
         $redis->connect('127.0.0.1', 6379);
-        var_dump($redis->get('gao'));die;
+        $redis->lPush('gaos','i');
+        $redis->lPush('gaos','love');
+        $redis->lPush('gaos','xiao');
+        $redis->lPush('gaos','bao');
+        $aa=$redis->lRange('gaos',0,-1);
+
+        var_dump($aa);die;
         $hashObj=new HashController();
         $hashObj->addServer("serv1")->addServer("serv2")->addServer("serv3");
         for($i=100;$i<200;$i++){
